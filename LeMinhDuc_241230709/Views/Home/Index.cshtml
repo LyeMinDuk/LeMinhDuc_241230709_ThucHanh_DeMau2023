@@ -1,0 +1,24 @@
+﻿@model IEnumerable<HangHoa>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="main">
+    <div class="content" id="noi-dung">
+        <partial name="LeMinhDuc_MainContent" model="Model" />
+
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).on("click", ".menu-loai", function (e) {
+            e.preventDefault();
+            var $a = $(this);
+            $.get('@Url.Action("TheoLoai", "Home")', { id: $a.data('id') }, function (html) {
+                $('#noi-dung').html(html);
+                $('.menu li').removeClass('active');
+                $a.parent().addClass('active');
+            });
+        });
+    </script>
+}
